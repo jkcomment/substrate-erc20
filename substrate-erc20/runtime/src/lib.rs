@@ -55,9 +55,6 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
-/// Used for the module template in `./template.rs`
-mod template;
-
 mod erc20;
 
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
@@ -189,11 +186,6 @@ impl sudo::Trait for Runtime {
 	type Proposal = Call;
 }
 
-/// Used for the module template in `./template.rs`
-impl template::Trait for Runtime {
-	type Event = Event;
-}
-
 impl erc20::Trait for Runtime {
 	type TokenBalance = u128;
 	type Event = Event;
@@ -212,8 +204,6 @@ construct_runtime!(
 		Indices: indices,
 		Balances: balances,
 		Sudo: sudo,
-		// Used for the module template in `./template.rs`
-		TemplateModule: template::{Module, Call, Storage, Event<T>},
 		Erc20: erc20::{Module, Call, Storage, Event<T>, Config<T>},
 	}
 );
